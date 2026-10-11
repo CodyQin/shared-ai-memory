@@ -1,0 +1,17 @@
+# Local and sensitive files
+.DS_Store
+Thumbs.db
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*
+secrets*
+
+# Temporary files
+*.tmp
+*.log
+.idea/
+.vscode/

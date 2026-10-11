@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>Shared AI Memory｜让不同电脑和 AI 共享记忆</title>
+  <meta name="description" content="把一段提示词发给 Agent，搭建由你控制、跨电脑和跨 AI 的共享记忆。" />
+  <style>
+    :root { --bg:#070910; --panel:#111521; --line:rgba(255,255,255,.12); --text:#f7f8fc; --muted:#aeb5c8; --purple:#9979ff; --cyan:#56e0ff; --green:#74f7b4; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--text); font-family:Inter,system-ui,-apple-system,"Microsoft YaHei",sans-serif; background:radial-gradient(circle at 18% 5%,rgba(153,121,255,.24),transparent 28%),radial-gradient(circle at 90% 65%,rgba(86,224,255,.16),transparent 30%),var(--bg); }
+    a { color:inherit; text-decoration:none; }
+    .wrap { width:min(1080px,91vw); margin:auto; }
+    nav { height:76px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
+    .brand { font-weight:900; letter-spacing:-.02em; }
+    .brand span { color:var(--cyan); }
+    .navlink { color:var(--muted); font-size:14px; }
+    .hero { min-height:620px; display:grid; grid-template-columns:1.12fr .88fr; align-items:center; gap:64px; padding:70px 0; }
+    .tag { display:inline-flex; padding:9px 14px; border-radius:999px; border:1px solid rgba(116,247,180,.32); color:#acf9cf; background:rgba(116,247,180,.07); font-size:14px; font-weight:750; }
+    h1 { margin:24px 0 20px; font-size:clamp(48px,7vw,88px); line-height:1.02; letter-spacing:-.06em; }
+    h1 span { color:transparent; background:linear-gradient(100deg,#fff,var(--cyan),var(--purple)); background-clip:text; -webkit-background-clip:text; }
+    .lead { color:var(--muted); font-size:clamp(18px,2vw,23px); line-height:1.65; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
+    button,.button { border:0; border-radius:14px; padding:15px 20px; font:800 15px/1 system-ui,"Microsoft YaHei"; cursor:pointer; }
+    .primary { color:#071014; background:linear-gradient(110deg,var(--green),var(--cyan)); }
+    .secondary { color:white; border:1px solid var(--line); background:rgba(255,255,255,.055); }
+    .promise { color:#7f879c; font-size:13px; margin-top:14px; }
+    .diagram { position:relative; min-height:430px; display:grid; place-items:center; }
+    .core { width:220px; height:220px; display:grid; place-items:center; text-align:center; border-radius:50%; border:1px solid rgba(116,247,180,.45); background:radial-gradient(circle,rgba(116,247,180,.18),rgba(86,224,255,.04)); box-shadow:0 0 90px rgba(116,247,180,.12); font-weight:900; }
+    .node { position:absolute; padding:12px 16px; border:1px solid var(--line); border-radius:13px; background:rgba(17,21,33,.9); color:#dce0ea; font-size:14px; }
+    .n1 { left:0; top:22%; }.n2 { right:0; top:18%; }.n3 { left:3%; bottom:16%; }.n4 { right:1%; bottom:20%; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; padding:30px 0 90px; }
+    .card { padding:27px; border:1px solid var(--line); border-radius:22px; background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025)); }
+    .card b { display:block; font-size:22px; margin-bottom:12px; }
+    .card p { color:var(--muted); line-height:1.6; margin:0; }
+    .steps { padding:70px 0; border-top:1px solid var(--line); }
+    h2 { font-size:clamp(32px,4vw,54px); letter-spacing:-.04em; margin:0 0 36px; }
+    .step { display:grid; grid-template-columns:55px 1fr; gap:18px; padding:20px 0; border-bottom:1px solid var(--line); }
+    .num { color:var(--cyan); font-weight:900; }
+    .step b { font-size:20px; }.step p { color:var(--muted); margin:6px 0 0; line-height:1.5; }
+    .warning { margin:70px 0; padding:28px; border:1px solid rgba(255,184,107,.28); background:rgba(255,184,107,.065); border-radius:20px; color:#f4e5d2; line-height:1.65; }
+    footer { padding:35px 0 50px; border-top:1px solid var(--line); display:flex; justify-content:space-between; color:#7f879c; font-size:13px; }
+    .toast { position:fixed; left:50%; bottom:26px; transform:translate(-50%,18px); padding:12px 17px; border-radius:12px; background:white; color:#0b0d14; font-weight:800; opacity:0; transition:.22s; pointer-events:none; }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    @media(max-width:760px){.hero{grid-template-columns:1fr;gap:20px}.diagram{min-height:340px}.grid{grid-template-columns:1fr}.actions>*{width:100%;text-align:center}footer{display:grid;gap:8px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav><div class="brand">Shared <span>AI Memory</span></div><a class="navlink" href="https://github.com/CodyQin/shared-ai-memory">GitHub ↗</a></nav>
+    <main>
+      <section class="hero">
+        <div>
+          <div class="tag">开源 · 不用学 Git</div>
+          <h1>让不同电脑、不同 AI，<span>共享同一份记忆</span></h1>
+          <p class="lead">把一段话发给能操作本机的 Agent，让它替你创建 Private GitHub 仓库、接入当前设备，并生成第二台电脑的接入提示词。</p>
+          <div class="actions">
+            <button class="primary" id="copy">复制给我的 Agent</button>
+            <a class="button secondary" href="prompts/INSTALL.md">查看完整安装说明</a>
+          </div>
+          <div class="promise">你只需要完成 GitHub 官方登录与授权。不要把密码、验证码或 Token 发给 Agent。</div>
+        </div>
+        <div class="diagram" aria-label="不同设备和 Agent 连接到私人记忆">
+          <div class="node n1">Windows</div><div class="node n2">Mac</div><div class="node n3">Codex / Claude</div><div class="node n4">国产 Agent / 更多</div>
+          <div class="core">PRIVATE<br />MEMORY<br /><small>Markdown + GitHub</small></div>
+        </div>
+      </section>
+      <section class="grid">
+        <article class="card"><b>跨设备</b><p>Windows、Mac 或下一台电脑，都从同一个私人仓库获得最新上下文。</p></article>
+        <article class="card"><b>跨 Agent</b><p>核心记忆是普通 Markdown，不属于 Codex、Claude 或任何单一厂商。</p></article>
+        <article class="card"><b>可追溯</b><p>每次改动都有历史；冲突时保留双方，由你决定什么才是最新事实。</p></article>
+      </section>
+      <section class="steps">
+        <h2>普通用户，只做三件事</h2>
+        <div class="step"><div class="num">01</div><div><b>复制提示词</b><p>点击上面的按钮，把完整内容发给一款能操作本机文件的 Agent。</p></div></div>
+        <div class="step"><div class="num">02</div><div><b>完成官方授权</b><p>只在 GitHub 官方页面登录。其余工具、目录、文件和仓库由 Agent 处理。</p></div></div>
+        <div class="step"><div class="num">03</div><div><b>把接入提示词发给第二台电脑</b><p>两边回答同一个项目问题，答案一致，才算真正接通。</p></div></div>
+        <div class="warning"><b>隐私提醒：</b>公开的是空模板，你的个人记忆必须放在另一个 Private 仓库。密码、API Key、Token、验证码、证件、银行卡和其他高敏感信息不要写入。Private 也不等于可以无边界收集。</div>
+      </section>
+    </main>
+    <footer><span>Built by Cody Qin · MIT License</span><span>AI 可以换，记忆仍然属于你。</span></footer>
+  </div>
+  <div class="toast" id="toast">已复制，可以直接发给 Agent</div>
+  <script>
+    const repo = 'https://github.com/CodyQin/shared-ai-memory';
+    const prompt = `请帮我搭建一套跨电脑、跨系统、跨 AI Agent 的共享记忆。\n\n公开模板：${repo}\n\n请先读取或克隆模板，然后完整执行其中的 prompts/INSTALL.md。不要只给我教程，请在我的电脑上实际完成；除 GitHub 官方登录、授权、系统权限和重大修改确认外，尽量不要让我手动操作。\n\n我的个人记忆必须放在一个新建的 Private GitHub 仓库，绝不能写回公开模板。不要向我索取或保存密码、验证码、Token、API Key、私钥或 Cookie。创建后、写入个人内容前、每次推送前，都要明确验证仓库可见性为 PRIVATE；无法验证就停止。\n\n完成后，请生成一段已经填好私有仓库地址的“第二台设备接入提示词”，并进行完整自检。`;
+    const toast = document.getElementById('toast');
+    document.getElementById('copy').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(prompt); }
+      catch { const area=document.createElement('textarea'); area.value=prompt; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove(); }
+      toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1800);
+    });
+  </script>
+</body>
+</html>
