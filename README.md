@@ -42,9 +42,9 @@ Gitee（中国大陆镜像）：https://gitee.com/codyqin17/shared-ai-memory
 
 GitHub 与 Gitee 不是同一家公司，也不是从属关系。这里的两个公开仓库内容相同，观众选择一个能稳定访问的平台即可，不需要同时注册两个账号。个人记忆只放进自己选择的平台上的另一个 Private 仓库。
 
-## 为什么这里选择 GitHub / Gitee，而不是普通文档
+## 为什么这里选择 GitHub / Gitee
 
-Notion、飞书和 Obsidian 都能保存内容，但这个问题更在意：不同本地 Agent 能否稳定读写同一批开放文件、同步到不同电脑，并看见每一次修改。
+不同本地 Agent 能否稳定读写同一批开放文件、同步到不同电脑，并看见每一次修改。
 
 Git 仓库正好提供：
 
