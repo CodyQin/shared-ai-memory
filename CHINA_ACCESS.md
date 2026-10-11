@@ -7,13 +7,15 @@ GitHub 是主仓库和首选体验，但不能假设每位用户都能稳定访�
 1. GitHub 主仓库：开发、Issue 和上游版本
 2. Gitee 公共镜像：中国大陆下载、克隆、阅读提示词
 
+Gitee 镜像：`https://gitee.com/codyqin17/shared-ai-memory`
+
 公开的是同一套空模板，不同步任何用户的个人记忆。
 
 ## 两种安装路径
 
 ### 非技术用户
 
-1. 打开国内可访问的项目说明页或 Gitee 镜像。
+1. 打开 `https://gitee.com/codyqin17/shared-ai-memory`。
 2. 复制 `prompts/INSTALL_GITEE.md`。
 3. 发给能操作本机的 Agent。
 4. 在 Gitee 官方网页完成登录；若自动创建仓库不可用，只手动点击一次“新建 Private 仓库”。

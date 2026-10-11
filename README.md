@@ -26,6 +26,14 @@ Mac + Claude Code ├─ Agent 适配层 ─ 私有 GitHub 仓库 ─ Markdown �
 
 用户不需要理解 Git 命令，也不需要手动创建仓库。
 
+### 中国大陆访问
+
+无法稳定访问 GitHub 时，使用内容一致的 Gitee 镜像：
+
+`https://gitee.com/codyqin17/shared-ai-memory`
+
+打开 [`prompts/INSTALL_GITEE.md`](prompts/INSTALL_GITEE.md)，把正文完整发给能操作本机文件和终端的 Agent。个人记忆仍然必须存放在另一个 Private 仓库。
+
 ## 设计原则
 
 - **跨 Agent**：核心记忆使用普通 Markdown，不依赖某个厂商的专有格式。

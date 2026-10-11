@@ -1,10 +1,10 @@
 # 中国大陆兼容版安装提示词（Gitee）
 
-适用于无法稳定访问 GitHub、但可以访问 Gitee 的用户。把下面正文和公开 Gitee 模板地址一起发给一款能操作本机文件与终端的 Agent。
+适用于无法稳定访问 GitHub、但可以访问 Gitee 的用户。把下面正文发给一款能操作本机文件与终端的 Agent。
 
 ---
 
-请帮我搭建一套跨电脑、跨系统、跨 AI Agent 的共享记忆。我无法稳定访问 GitHub，请使用这个公开 Gitee 模板：`<PUBLIC_GITEE_TEMPLATE_URL>`。
+请帮我搭建一套跨电脑、跨系统、跨 AI Agent 的共享记忆。我无法稳定访问 GitHub，请使用这个公开 Gitee 模板：`https://gitee.com/codyqin17/shared-ai-memory`。
 
 我不是技术用户。请实际完成安装，不要只给 Git 教程，也不要让我手动输入 Git 命令。
 
