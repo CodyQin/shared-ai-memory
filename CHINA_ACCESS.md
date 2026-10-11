@@ -1,5 +1,11 @@
 # 中国大陆访问与镜像
 
+## 先讲清楚两者关系
+
+Git 是版本管理方式；GitHub 与 Gitee 是两个相互独立的 Git 仓库托管平台，不是同一家公司，也不是从属关系。
+
+本项目把 GitHub 作为主发布源，并把同一份公开空模板同步到 Gitee，方便中国大陆访问。观众只需要选择一个能稳定访问的平台，不需要两个账号都注册。个人记忆只放在自己选择的平台上的另一个 Private 仓库。
+
 ## 原则
 
 GitHub 是主仓库和首选体验，但不能假设每位用户都能稳定访问。项目可以维护两个内容一致的入口：
@@ -15,11 +21,12 @@ Gitee 镜像：`https://gitee.com/codyqin17/shared-ai-memory`
 
 ### 非技术用户
 
-1. 打开 `https://gitee.com/codyqin17/shared-ai-memory`。
-2. 复制 `prompts/INSTALL_GITEE.md`。
-3. 发给能操作本机的 Agent。
-4. 在 Gitee 官方网页完成登录；若自动创建仓库不可用，只手动点击一次“新建 Private 仓库”。
-5. 后续本地 Git、文件和设备接入仍由 Agent 完成。
+不需要打开仓库找文件。直接复制项目首页或视频置顶评论中的统一提示词；其中已经包含：
+
+- GitHub：`https://github.com/CodyQin/shared-ai-memory`
+- Gitee：`https://gitee.com/codyqin17/shared-ai-memory`
+
+Agent 会先测试哪个入口可访问。GitHub 不可达时，它应直接读取 Gitee 的 `prompts/INSTALL_GITEE.md`。用户只在 Gitee 官方网页完成登录；若自动创建仓库不可用，只手动点击一次“新建 Private 仓库”。后续本地 Git、文件和设备接入仍由 Agent 完成。
 
 ### 技术用户
 

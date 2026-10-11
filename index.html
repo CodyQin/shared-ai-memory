@@ -54,9 +54,9 @@
         <div>
           <div class="tag">开源 · 不用学 Git</div>
           <h1>让不同电脑、不同 AI，<span>共享同一份记忆</span></h1>
-          <p class="lead">把一段话发给能操作本机的 Agent，让它替你创建 Private Git 仓库、接入当前设备，并生成第二台电脑的接入提示词。</p>
+          <p class="lead">不用打开仓库找文件。复制一段已经包含 GitHub 与 Gitee 地址的提示词，让 Agent 自动选择可访问的入口并完成搭建。</p>
           <div class="actions">
-            <button class="primary" id="copy">复制给我的 Agent</button>
+            <button class="primary" id="copy">一键复制完整提示词</button>
             <a class="button secondary" href="prompts/INSTALL.md">查看完整安装说明</a>
             <a class="button secondary" href="https://gitee.com/codyqin17/shared-ai-memory">国内 Gitee 镜像</a>
           </div>
@@ -74,8 +74,8 @@
       </section>
       <section class="steps">
         <h2>普通用户，只做三件事</h2>
-        <div class="step"><div class="num">01</div><div><b>复制提示词</b><p>点击上面的按钮，把完整内容发给一款能操作本机文件的 Agent。</p></div></div>
-        <div class="step"><div class="num">02</div><div><b>完成官方授权</b><p>只在 GitHub 官方页面登录。其余工具、目录、文件和仓库由 Agent 处理。</p></div></div>
+        <div class="step"><div class="num">01</div><div><b>复制这一段</b><p>提示词已包含两个准确地址；不用进入 GitHub 或 Gitee 寻找文件。</p></div></div>
+        <div class="step"><div class="num">02</div><div><b>完成官方授权</b><p>只在 GitHub 或 Gitee 官方页面登录。其余工具、目录、文件和仓库由 Agent 处理。</p></div></div>
         <div class="step"><div class="num">03</div><div><b>把接入提示词发给第二台电脑</b><p>两边回答同一个项目问题，答案一致，才算真正接通。</p></div></div>
         <div class="warning"><b>隐私提醒：</b>公开的是空模板，你的个人记忆必须放在另一个 Private 仓库。密码、API Key、Token、验证码、证件、银行卡和其他高敏感信息不要写入。Private 也不等于可以无边界收集。</div>
       </section>
@@ -84,8 +84,7 @@
   </div>
   <div class="toast" id="toast">已复制，可以直接发给 Agent</div>
   <script>
-    const repo = 'https://github.com/CodyQin/shared-ai-memory';
-    const prompt = `请帮我搭建一套跨电脑、跨系统、跨 AI Agent 的共享记忆。\n\n公开模板：${repo}\n\n请先读取或克隆模板，然后完整执行其中的 prompts/INSTALL.md。不要只给我教程，请在我的电脑上实际完成；除 GitHub 官方登录、授权、系统权限和重大修改确认外，尽量不要让我手动操作。\n\n我的个人记忆必须放在一个新建的 Private GitHub 仓库，绝不能写回公开模板。不要向我索取或保存密码、验证码、Token、API Key、私钥或 Cookie。创建后、写入个人内容前、每次推送前，都要明确验证仓库可见性为 PRIVATE；无法验证就停止。\n\n完成后，请生成一段已经填好私有仓库地址的“第二台设备接入提示词”，并进行完整自检。`;
+    const prompt = `请直接在这台电脑上帮我搭建一套跨电脑、跨系统、跨 AI Agent 的共享记忆。不要只给我教程，请实际完成。\n\n这里有两个内容相同的公开模板入口：\nGitHub：https://github.com/CodyQin/shared-ai-memory\nGitee（中国大陆镜像）：https://gitee.com/codyqin17/shared-ai-memory\n\n请先测试你能稳定访问哪个入口：能访问 GitHub 就读取并执行其中的 prompts/INSTALL.md；GitHub 不可达就读取并执行 Gitee 中的 prompts/INSTALL_GITEE.md。不要让我自己打开仓库找文件，也不要让我手动输入 Git 命令。\n\n请为我的个人记忆另外创建一个 Private 仓库，绝不能把个人内容写回上面的公开模板。除官方登录、授权、系统权限和重大修改确认外，其余步骤尽量由你完成。不要向我索取或保存密码、验证码、Token、API Key、私钥或 Cookie；每次写入和推送前都要确认个人仓库为 Private。\n\n完成后，请生成一段已经填好私人仓库地址的“第二台设备接入提示词”，并完成自检。现在先用不超过 6 句话说明计划，然后开始执行。`;
     const toast = document.getElementById('toast');
     document.getElementById('copy').addEventListener('click', async () => {
       try { await navigator.clipboard.writeText(prompt); }
